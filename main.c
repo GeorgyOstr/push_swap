@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 00:02:10 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/13 23:18:20 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/13 23:39:36 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,29 @@ static long	ft_atoi(char *str)
 	return (ans * sign);
 }
 
-t_ringbuffer	validate(int argc, char**argv)
+t_bufs	validate(int argc, char**argv)
 {
-	size_t			i;
-	t_ringbuffer	ans;
+	size_t	i;
+	t_bufs	bufs;
 
 	i = 0;
 	if (argc <= 1)
 		exit(0);
-	ans.buf = malloc(2 * (argc - 1) * sizeof(long));
-	if (!ans.buf)
+	bufs.a.data = malloc(2 * (argc - 1) * sizeof(long));
+	if (!bufs.a.data)
 		error_exit(MALLOC_ERROR);
-	ans.writepos = 0;
-	ans.readpos = 0;
-	ans.len = argc - 1;
+	bufs.b.data = bufs.a.data + argc - 1;
+	bufs.len = argc - 1;
 	while (i < argc - 1)
 	{
-		ans.buf[i] = ft_atoi(argv[i + 1]);
-		ans.buf[i + ans.len] = ft_atoi(argv[i + 1]);
+		bufs.b.data[i] = ft_atoi(argv[i + 1]);
+		bufs.a.data[i] = ft_atoi(argv[i + 1]);
 		i++;
 	}
-	return (ans);
+	return (bufs);
 }
 
-void	check_repeat(t_ringbuffer *b)
+void	check_repeat(t_bufs *b)
 {
 	size_t	i;
 	size_t	j;
@@ -84,7 +83,7 @@ void	check_repeat(t_ringbuffer *b)
 		j = 0;
 		while (j < b->len)
 		{
-			if (i != j && b->buf[j] == b->buf[i])
+			if (i != j && b->a.data[j] == b->a.data[i])
 				error_exit(UNIQUE_ERROR);
 			j++;
 		}
@@ -92,7 +91,7 @@ void	check_repeat(t_ringbuffer *b)
 	}
 }
 
-void	enumerate(t_ringbuffer *b)
+void	enumerate(t_bufs *b)
 {
 	size_t	i;
 	size_t	j;
@@ -106,32 +105,32 @@ void	enumerate(t_ringbuffer *b)
 		min = (long)INT_MAX + 1;
 		while (j < b->len)
 		{
-			if (b->buf[j] < min)
+			if (b->b.data[j] < min)
 			{
-				min = b->buf[j];
+				min = b->b.data[j];
 				jmin = j;
 			}
 			j++;
 		}
-		b->buf[jmin + b->len] = i;
-		b->buf[jmin] = (long)INT_MAX + 1;
+		b->a.data[jmin] = i;
+		b->b.data[jmin] = (long)INT_MAX + 1;
 		i++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	int				i;
-	t_ringbuffer	data;
+	int		i;
+	t_bufs	bufs;
 
-	data = validate(argc, argv);
-	check_repeat(&data);
-	enumerate(&data);
+	bufs = validate(argc, argv);
+	check_repeat(&bufs);
+	enumerate(&bufs);
 	i = 0;
-	while (i < data.len)
+	while (i < bufs.len)
 	{
-		printf("%ld\n", data.buf[data.len + i++]);
+		printf("%ld\n", bufs.a.data[i++]);
 	}
-	free(data.buf);
+	free(bufs.a.data);
 	return (0);
 }
