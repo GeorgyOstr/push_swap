@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:53:33 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/13 19:54:38 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/13 23:06:08 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define VALIDATE_ERROR		1
 # define ATOI_ERROR			2	
 # define MALLOC_ERROR		3
+# define UNIQUE_ERROR		4
 
 # include <limits.h>
 # include <stdlib.h>
@@ -24,9 +25,10 @@
 
 typedef struct s_ringbuffer
 {
-	int		*buf;
+	long	*buf;
 	size_t	writepos;
 	size_t	readpos;
+	size_t	len;	
 }	t_ringbuffer;
 
 void	error_exit(int err_num);
