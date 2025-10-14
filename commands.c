@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 12:26:31 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/14 17:27:53 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/14 18:26:09 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	pb(t_bufs *b)
 	b->a.top -= 1;
 	b->b.data[b->b.top] = b->a.data[b->a.top];
 	b->b.top += 1;
+	write(1, "pb\n", 3);
 }
 
 void	pa(t_bufs *b)
@@ -24,6 +25,7 @@ void	pa(t_bufs *b)
 	b->b.top -= 1;
 	b->a.data[b->a.top] = b->b.data[b->b.top];
 	b->a.top += 1;
+	write(1, "pa\n", 3);
 }
 
 void	sa(t_bufs *b)
@@ -33,6 +35,7 @@ void	sa(t_bufs *b)
 	tmp = b->a.data[b->a.top - 1];
 	b->a.data[b->a.top - 1] = b->a.data[b->a.top - 2];
 	b->a.data[b->a.top - 2] = tmp;
+	write(1, "sa\n", 3);
 }
 
 void	sb(t_bufs *b)
@@ -42,6 +45,7 @@ void	sb(t_bufs *b)
 	tmp = b->b.data[b->b.top - 1];
 	b->b.data[b->b.top - 1] = b->b.data[b->b.top - 2];
 	b->b.data[b->b.top - 2] = tmp;
+	write(1, "sb\n", 3);
 }
 
 static void	r(t_ringbuffer *b)
@@ -64,11 +68,13 @@ static void	r(t_ringbuffer *b)
 void	ra(t_bufs *b)
 {
 	r(&(b->a));
+	write(1, "ra\n", 3);
 }
 
 void	rb(t_bufs *b)
 {
 	r(&(b->b));
+	write(1, "rb\n", 3);
 }
 
 static void	rr(t_ringbuffer *b)
@@ -89,9 +95,11 @@ static void	rr(t_ringbuffer *b)
 void	rra(t_bufs *b)
 {
 	rr(&(b->a));
+	write(1, "rra\n", 4);
 }
 
 void	rrb(t_bufs *b)
 {
 	rr(&(b->b));
+	write(1, "rrb\n", 4);
 }
