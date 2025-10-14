@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 17:33:16 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/14 18:34:35 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/14 19:59:19 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	not_sorted(t_bufs *b)
 		return (1);
 	while (i < b->a.top)
 	{
-		if (b->a.data[i] != i)
+		if (b->a.data[i] != b->a.top - i - 1)
 			return (1);
 		i++;
 	}
@@ -36,11 +36,12 @@ static int	move_to_min(t_bufs *b)
 
 	i = 0;
 	min = (long)INT_MAX + 1;
+	imin = 0;
 	while (i < b->a.top)
 	{
 		if (b->a.data[i] < min)
 		{
-			imin = i;
+			imin = b->a.top - i - 1;
 			min = b->a.data[i];
 		}
 		i++;
@@ -62,10 +63,8 @@ void	solver(t_bufs *b)
 	{
 		move_to_min(b);
 	}
-	i = 0;
-	while (i < b->len)
+	while (b->b.top)
 	{
 		pa(b);
-		i++;
 	}
 }
