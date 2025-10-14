@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:53:33 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/13 23:31:08 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/14 15:49:50 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@
 typedef struct s_ringbuffer
 {
 	long	*data;
-	size_t	writepos;
-	size_t	readpos;
+	size_t	top;
 }	t_ringbuffer;
 
 typedef struct s_bufs
@@ -38,5 +37,12 @@ typedef struct s_bufs
 }	t_bufs;
 
 void	error_exit(int err_num);
-
+void	pa(t_bufs *b);
+void	pb(t_bufs *b);
+void	sa(t_bufs *b);
+void	sb(t_bufs *b);
+void	ra(t_bufs *b);
+void	rb(t_bufs *b);
+void	rra(t_bufs *b);
+void	rrb(t_bufs *b);
 #endif 

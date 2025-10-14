@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 00:02:10 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/13 23:39:36 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/14 17:27:24 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,12 @@ t_bufs	validate(int argc, char**argv)
 		error_exit(MALLOC_ERROR);
 	bufs.b.data = bufs.a.data + argc - 1;
 	bufs.len = argc - 1;
+	bufs.a.top = argc - 1;
+	bufs.b.top = 0;
 	while (i < argc - 1)
 	{
-		bufs.b.data[i] = ft_atoi(argv[i + 1]);
-		bufs.a.data[i] = ft_atoi(argv[i + 1]);
+		bufs.b.data[i] = ft_atoi(argv[argc - i - 1]);
+		bufs.a.data[i] = ft_atoi(argv[argc - i - 1]);
 		i++;
 	}
 	return (bufs);
@@ -127,9 +129,9 @@ int	main(int argc, char **argv)
 	check_repeat(&bufs);
 	enumerate(&bufs);
 	i = 0;
-	while (i < bufs.len)
+	while (i < bufs.a.top)
 	{
-		printf("%ld\n", bufs.a.data[i++]);
+		printf("%ld\n", bufs.a.data[bufs.a.top - i++ - 1]);
 	}
 	free(bufs.a.data);
 	return (0);
