@@ -2,3 +2,5 @@ a.out
 *swp
 *checker*
 *tester*
+*.sw*
+push_swap
