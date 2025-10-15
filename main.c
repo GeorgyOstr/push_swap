@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 00:02:10 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/14 19:53:24 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/15 12:13:24 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,17 +128,19 @@ int	main(int argc, char **argv)
 	bufs = validate(argc, argv);
 	check_repeat(&bufs);
 	enumerate(&bufs);
-	//i = 0;
-	//while (i < bufs.a.top)
-	//{
-	//	printf("%ld\n", bufs.a.data[bufs.a.top - i++ - 1]);
-	//}
+	i = 0;
+	while (i < bufs.a.top)
+	{
+		//printf("%ld\n", bufs.a.data[bufs.a.top - i - 1]);
+		i++;
+	}
 	solver(&bufs);
-	//i = 0;
-	//while (i < bufs.a.top)
-	//{
-	//	printf("%ld\n", bufs.a.data[bufs.a.top - i++ - 1]);
-	//}
+	i = 0;
+	while (i < bufs.a.top)
+	{
+		//printf("%ld\n", bufs.a.data[bufs.a.top - i - 1]);
+		i++;
+	}
 	free(bufs.a.data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 17:33:16 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/14 19:59:19 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/15 12:16:53 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,20 @@ static int	move_to_min(t_bufs *b)
 	{
 		if (b->a.data[i] < min)
 		{
-			imin = b->a.top - i - 1;
+			imin = i;
 			min = b->a.data[i];
 		}
 		i++;
 	}
-	i = 0;
-	while (i != imin)
+	if (imin + 1 < b->a.top - imin - 1)
 	{
-		ra(b);
-		i++;
+		while (b->a.data[b->a.top - 1] != min)
+			rra(b);
+	}
+	else
+	{
+		while (b->a.data[b->a.top - 1] != min)
+			ra(b);
 	}
 	pb(b);
 }
