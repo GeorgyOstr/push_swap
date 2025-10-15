@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 17:33:16 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/15 12:16:53 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/15 15:54:24 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,47 +28,49 @@ static int	not_sorted(t_bufs *b)
 	return (0);
 }
 
-static int	move_to_min(t_bufs *b)
+static void	radixa(t_bufs *b, int pow)
 {
 	size_t	i;
-	size_t	imin;
-	long	min;
+	size_t	j;
+	size_t	size;
 
 	i = 0;
-	min = (long)INT_MAX + 1;
-	imin = 0;
-	while (i < b->a.top)
+	while (i < 10)
 	{
-		if (b->a.data[i] < min)
+		j = 0;
+		size = b->a.top;
+		while (b->a.top > 0 && j < size)
 		{
-			imin = i;
-			min = b->a.data[i];
+			if ((b->a.data[b->a.top - 1] / pow) % 10 == i)
+				pb(b);
+			else
+			{
+				if (b->a.top - 1 > 0)
+					ra(b);
+			}
+			j++;
 		}
 		i++;
 	}
-	if (imin + 1 < b->a.top - imin - 1)
-	{
-		while (b->a.data[b->a.top - 1] != min)
-			rra(b);
-	}
-	else
-	{
-		while (b->a.data[b->a.top - 1] != min)
-			ra(b);
-	}
-	pb(b);
+}
+
+static void	radixb(t_bufs *b, int pow)
+{
+	while (b->b.top)
+		pa(b);
 }
 
 void	solver(t_bufs *b)
 {
-	int	i;
+	long	i;
 
-	while (not_sorted(b) && b->a.top != 0)
+	i = 1;
+	while (not_sorted(b) && b->a.top != 0 && i < (long)INT_MAX * 10)
 	{
-		move_to_min(b);
+		radixa(b, i);
+		radixb(b, i);
+		i *= 10;
 	}
 	while (b->b.top)
-	{
 		pa(b);
-	}
 }
