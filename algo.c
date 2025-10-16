@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 17:33:16 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/16 10:26:48 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/16 10:33:05 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,23 +71,21 @@ static void	radixa(t_bufs *b, int pow)
 	i = 0;
 	while (i < RADIX_BASE)
 	{
-		if (!count_digit(&(b->a), i, pow))
+		if (count_digit(&(b->a), i, pow))
 		{
-			i++;
-			continue ;
-		}
-		j = 0;
-		size = b->a.top;
-		while (b->a.top > 0 && j < size)
-		{
-			if ((b->a.data[b->a.top - 1] / pow) % RADIX_BASE == i)
-				pb(b);
-			else
+			j = 0;
+			size = b->a.top;
+			while (b->a.top > 0 && j < size)
 			{
-				if (b->a.top - 1 > 0)
-					ra(b);
+				if ((b->a.data[b->a.top - 1] / pow) % RADIX_BASE == i)
+					pb(b);
+				else
+				{
+					if (b->a.top - 1 > 0)
+						ra(b);
+				}
+				j++;
 			}
-			j++;
 		}
 		i++;
 	}
@@ -102,23 +100,21 @@ static void	radixb(t_bufs *b, int pow)
 	i = RADIX_BASE - 1;
 	while (i >= 0)
 	{
-		if (!count_digit(&(b->b), i, pow))
+		if (count_digit(&(b->b), i, pow))
 		{
-			i--;
-			continue ;
-		}
-		j = 0;
-		size = b->b.top;
-		while (b->b.top > 0 && j < size)
-		{
-			if ((b->b.data[b->b.top - 1] / pow) % RADIX_BASE == i)
-				pa(b);
-			else
+			j = 0;
+			size = b->b.top;
+			while (b->b.top > 0 && j < size)
 			{
-				if (b->b.top - 1 > 0)
-					rb(b);
+				if ((b->b.data[b->b.top - 1] / pow) % RADIX_BASE == i)
+					pa(b);
+				else
+				{
+					if (b->b.top - 1 > 0)
+						rb(b);
+				}
+				j++;
 			}
-			j++;
 		}
 		i--;
 	}
@@ -139,13 +135,8 @@ void	solver(t_bufs *b)
 	{
 		radixa(b, i);
 		i *= RADIX_BASE;
-		//if (b->len > 100)
-		//	pa_all(b);
-		//else
-		//{
 		radixb(b, i);
 		i *= RADIX_BASE;
-		//}
 	}
 	pa_all(b);
 }
