@@ -14,9 +14,9 @@
 
 static void	min_pb(t_bufs *b)
 {
-	ssize_t	i;
+	size_t	i;
 	size_t	imin;
-	size_t	min;
+	long	min;
 
 	i = 0;
 	imin = 0;
@@ -42,7 +42,7 @@ static void	min_pb(t_bufs *b)
 
 void	lessthen(t_bufs *b)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < b->len - 3)

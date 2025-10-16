@@ -33,7 +33,7 @@ static void	check_repeat(t_bufs *b)
 
 static t_bufs	validate(int argc, char**argv)
 {
-	size_t	i;
+	int		i;
 	t_bufs	bufs;
 
 	i = 0;

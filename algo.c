@@ -21,7 +21,7 @@ static int	sorteda(t_bufs *b)
 	i = 0;
 	while (i < b->a.top)
 	{
-		if (b->a.data[i] != b->a.top - i - 1)
+		if (b->a.data[i] != (long)(b->a.top - i - 1))
 			return (0);
 		i++;
 	}

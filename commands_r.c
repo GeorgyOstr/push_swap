@@ -15,7 +15,7 @@
 static void	r(t_ringbuffer *b)
 {
 	long	tmp;
-	size_t	i;
+	long	i;
 
 	tmp = b->data[b->top - 1];
 	i = b->top - 2;
