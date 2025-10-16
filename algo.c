@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 17:33:16 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/16 19:14:50 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:19:55 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ static void	pa_all(t_bufs *b)
 void	solver(t_bufs *b)
 {
 	long	i;
-	
+
 	if (b->len == 2)
 		two(b);
 	else if (b->len == 3)

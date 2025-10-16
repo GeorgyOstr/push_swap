@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:42:01 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/16 19:13:28 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:22:44 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	min_pb(t_bufs *b)
 {
-	size_t  i;
-	size_t  imin;
-	long    min;
-	
+	size_t	i;
+	size_t	imin;
+	long	min;
+
 	i = 0;
 	min = (long)INT_MAX + 1;
 	imin = 0;
@@ -43,7 +43,7 @@ static void	min_pb(t_bufs *b)
 	pb(b);
 }
 
-void lessthen(t_bufs *b)
+void	lessthen(t_bufs *b)
 {
 	int	i;
 
@@ -62,18 +62,18 @@ void lessthen(t_bufs *b)
 	}
 }
 
-void three(t_bufs *b)
+void	three(t_bufs *b)
 {
-	if (b->a.data[b->a.top - 3] > b->a.data[b->a.top - 1] 
+	if (b->a.data[b->a.top - 3] > b->a.data[b->a.top - 1]
 		&& b->a.data[b->a.top - 3] > b->a.data[b->a.top - 2])
 		two(b);
-	else if (b->a.data[b->a.top - 1] > b->a.data[b->a.top - 2] 
+	else if (b->a.data[b->a.top - 1] > b->a.data[b->a.top - 2]
 		&& b->a.data[b->a.top - 1] > b->a.data[b->a.top - 3])
 	{
 		ra(b);
 		two(b);
 	}
-	else if (b->a.data[b->a.top - 2] > b->a.data[b->a.top - 1] 
+	else if (b->a.data[b->a.top - 2] > b->a.data[b->a.top - 1]
 		&& b->a.data[b->a.top - 2] > b->a.data[b->a.top - 3])
 	{
 		rra(b);
@@ -81,7 +81,7 @@ void three(t_bufs *b)
 	}
 }
 
-void two(t_bufs *b)
+void	two(t_bufs *b)
 {
 	if (b->a.data[b->a.top - 1] > b->a.data[b->a.top - 2])
 		sa(b);
