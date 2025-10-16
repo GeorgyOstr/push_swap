@@ -6,12 +6,14 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:53:33 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/14 18:21:37 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/16 10:25:58 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# define RADIX_BASE			5
 
 # define VALIDATE_ERROR		1
 # define ATOI_ERROR			2	

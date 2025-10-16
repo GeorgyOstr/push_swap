@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 17:33:16 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/16 00:04:50 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/16 10:26:48 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ static size_t	count_digit(t_ringbuffer *b, int dig, int pow)
 	c = 0;
 	while (i < b->top)
 	{
-		if ((b->data[b->top - 1] / pow) % 10 == dig)
+		if ((b->data[i] / pow) % RADIX_BASE == dig)
 		{
 			c++;
-		}	
+		}
 		i++;
 	}
 	return (c);
@@ -69,18 +69,18 @@ static void	radixa(t_bufs *b, int pow)
 	size_t	size;
 
 	i = 0;
-	while (i < 10)
+	while (i < RADIX_BASE)
 	{
-//		if (!count_digit(&(b->a), i, pow))
-//		{	
-//			i++;
-//			continue ;
-//		}
+		if (!count_digit(&(b->a), i, pow))
+		{
+			i++;
+			continue ;
+		}
 		j = 0;
 		size = b->a.top;
 		while (b->a.top > 0 && j < size)
 		{
-			if ((b->a.data[b->a.top - 1] / pow) % 10 == i)
+			if ((b->a.data[b->a.top - 1] / pow) % RADIX_BASE == i)
 				pb(b);
 			else
 			{
@@ -99,19 +99,19 @@ static void	radixb(t_bufs *b, int pow)
 	size_t	j;
 	size_t	size;
 
-	i = 9;
+	i = RADIX_BASE - 1;
 	while (i >= 0)
 	{
-		//if (!count_digit(&(b->b), i, pow))
-		//{	
-	//		i--;
-	//		continue ;
-	//	}
+		if (!count_digit(&(b->b), i, pow))
+		{
+			i--;
+			continue ;
+		}
 		j = 0;
 		size = b->b.top;
 		while (b->b.top > 0 && j < size)
 		{
-			if ((b->b.data[b->b.top - 1] / pow) % 10 == i)
+			if ((b->b.data[b->b.top - 1] / pow) % RADIX_BASE == i)
 				pa(b);
 			else
 			{
@@ -138,14 +138,14 @@ void	solver(t_bufs *b)
 	while (!sorteda(b) && b->a.top != 0 && i < (long)INT_MAX * 10)
 	{
 		radixa(b, i);
-		i *= 10;
-		if (b->len > 100)
-			pa_all(b);
-		else
-		{
-			radixb(b, i);
-			i *= 10;
-		}
+		i *= RADIX_BASE;
+		//if (b->len > 100)
+		//	pa_all(b);
+		//else
+		//{
+		radixb(b, i);
+		i *= RADIX_BASE;
+		//}
 	}
 	pa_all(b);
 }
