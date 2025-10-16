@@ -39,6 +39,9 @@ typedef struct s_bufs
 }	t_bufs;
 
 void	error_exit(int err_num);
+size_t	ft_strlen(char *str);
+long	ft_atoi(char *str);
+
 void	pa(t_bufs *b);
 void	pb(t_bufs *b);
 void	sa(t_bufs *b);

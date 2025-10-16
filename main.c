@@ -12,45 +12,26 @@
 
 #include "push_swap.h"
 
-size_t	ft_strlen(char *str)
+static void	check_repeat(t_bufs *b)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	while (str[i] && i < 20)
-		i++;
-	return (i);
-}
-
-static long	ft_atoi(char *str)
-{
-	int			i;
-	long		ans;
-	int			sign;
-	const int	len = ft_strlen(str);
-
-	sign = 1;
-	i = 0;
-	ans = 0;
-	if (len == 20 || len == 0)
-		error_exit(ATOI_ERROR);
-	if (str[i] == '+' || str[i] == '-')
+	while (i < b->len)
 	{
-		if (str[i] == '-')
-			sign = -1;
+		j = 0;
+		while (j < b->len)
+		{
+			if (i != j && b->a.data[j] == b->a.data[i])
+				error_exit(UNIQUE_ERROR);
+			j++;
+		}
 		i++;
 	}
-	while (str[i] && i < 20)
-	{
-		if ('0' > str[i] || str[i] > '9')
-			error_exit(ATOI_ERROR);
-		ans = 10 * ans + (str[i] - '0');
-		i++;
-	}
-	return (ans * sign);
 }
 
-t_bufs	validate(int argc, char**argv)
+static t_bufs	validate(int argc, char**argv)
 {
 	size_t	i;
 	t_bufs	bufs;
@@ -71,29 +52,11 @@ t_bufs	validate(int argc, char**argv)
 		bufs.a.data[i] = ft_atoi(argv[argc - i - 1]);
 		i++;
 	}
+	check_repeat(&bufs);
 	return (bufs);
 }
 
-void	check_repeat(t_bufs *b)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (i < b->len)
-	{
-		j = 0;
-		while (j < b->len)
-		{
-			if (i != j && b->a.data[j] == b->a.data[i])
-				error_exit(UNIQUE_ERROR);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	enumerate(t_bufs *b)
+static void	enumerate(t_bufs *b)
 {
 	size_t	i;
 	size_t	j;
@@ -122,25 +85,11 @@ void	enumerate(t_bufs *b)
 
 int	main(int argc, char **argv)
 {
-	int		i;
 	t_bufs	bufs;
 
 	bufs = validate(argc, argv);
-	check_repeat(&bufs);
 	enumerate(&bufs);
-	i = 0;
-	while (i < bufs.a.top)
-	{
-		//printf("%ld\n", bufs.a.data[bufs.a.top - i - 1]);
-		i++;
-	}
 	solver(&bufs);
-	i = 0;
-	while (i < bufs.a.top)
-	{
-		//printf("%ld\n", bufs.a.data[bufs.a.top - i - 1]);
-		i++;
-	}
 	free(bufs.a.data);
 	return (0);
 }

@@ -14,22 +14,19 @@
 
 static void	min_pb(t_bufs *b)
 {
-	size_t	i;
+	ssize_t	i;
 	size_t	imin;
-	long	min;
+	size_t	min;
 
 	i = 0;
-	min = (long)INT_MAX + 1;
 	imin = 0;
 	while (i < b->a.top)
 	{
-		if (b->a.data[i] < min)
-		{
+		if (b->a.data[i] < b->a.data[imin])
 			imin = i;
-			min = b->a.data[i];
-		}
 		i++;
 	}
+	min = b->a.data[imin];
 	if (imin + 1 < b->a.top - imin - 1)
 	{
 		while (b->a.data[b->a.top - 1] != min)

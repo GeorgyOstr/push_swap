@@ -28,22 +28,6 @@ static int	sorteda(t_bufs *b)
 	return (1);
 }
 
-static int	sortedb(t_bufs *b)
-{
-	size_t	i;
-
-	if (b->len != b->b.top)
-		return (1);
-	i = 0;
-	while (i < b->b.top)
-	{
-		if (b->a.data[i] != i)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 static size_t	count_digit(t_ringbuffer *b, int dig, int pow)
 {
 	size_t	i;
@@ -120,21 +104,17 @@ static void	radixb(t_bufs *b, int pow)
 	}
 }
 
-static void	pa_all(t_bufs *b)
-{
-	while (b->b.top)
-		pa(b);
-}
-
 void	solver(t_bufs *b)
 {
 	long	i;
 
+	if (b->len == 1)
+		return ;
 	if (b->len == 2)
 		two(b);
 	else if (b->len == 3)
 		three(b);
-	else if (b->len <= 20)
+	else if (b->len <= 30)
 		lessthen(b);
 	else
 	{
@@ -146,6 +126,5 @@ void	solver(t_bufs *b)
 			radixb(b, i);
 			i *= RADIX_BASE;
 		}
-		pa_all(b);
 	}
 }
