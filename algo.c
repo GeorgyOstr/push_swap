@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 17:33:16 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/16 10:33:05 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:14:50 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,14 +129,23 @@ static void	pa_all(t_bufs *b)
 void	solver(t_bufs *b)
 {
 	long	i;
-
-	i = 1;
-	while (!sorteda(b) && b->a.top != 0 && i < (long)INT_MAX * 10)
+	
+	if (b->len == 2)
+		two(b);
+	else if (b->len == 3)
+		three(b);
+	else if (b->len <= 20)
+		lessthen(b);
+	else
 	{
-		radixa(b, i);
-		i *= RADIX_BASE;
-		radixb(b, i);
-		i *= RADIX_BASE;
+		i = 1;
+		while (!sorteda(b) && b->a.top != 0 && i < (long)INT_MAX * 10)
+		{
+			radixa(b, i);
+			i *= RADIX_BASE;
+			radixb(b, i);
+			i *= RADIX_BASE;
+		}
+		pa_all(b);
 	}
-	pa_all(b);
 }
