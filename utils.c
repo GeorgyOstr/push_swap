@@ -6,7 +6,7 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 17:31:04 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/13 19:52:55 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:58:39 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ long	ft_atoi(char *str)
 	}
 	while (str[i] && i < 20)
 	{
-		if ('0' > str[i] || str[i] > '9')
-			error_exit(ATOI_ERROR);
 		ans = 10 * ans + (str[i] - '0');
+		if ('0' > str[i] || str[i] > '9' || sign * ans > INT_MAX
+			|| sign * ans < INT_MIN)
+			error_exit(ATOI_ERROR);
 		i++;
 	}
 	return (ans * sign);
