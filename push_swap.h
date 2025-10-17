@@ -6,24 +6,23 @@
 /*   By: gostroum <gostroum@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:53:33 by gostroum          #+#    #+#             */
-/*   Updated: 2025/10/16 19:23:04 by gostroum         ###   ########.fr       */
+/*   Updated: 2025/10/17 22:28:54 by gostroum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# define RADIX_BASE			5
+# define RADIX_BASE			4
 
 # define VALIDATE_ERROR		1
-# define ATOI_ERROR			2	
+# define ATOI_ERROR			2
 # define MALLOC_ERROR		3
 # define UNIQUE_ERROR		4
 
 # include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 typedef struct s_ringbuffer
 {
@@ -35,7 +34,7 @@ typedef struct s_bufs
 {
 	t_ringbuffer	a;
 	t_ringbuffer	b;
-	size_t			len;	
+	size_t			len;
 }	t_bufs;
 
 void	error_exit(int err_num);
@@ -56,4 +55,4 @@ void	three(t_bufs *b);
 void	lessthen(t_bufs *b);
 void	solver(t_bufs *b);
 
-#endif 
+#endif
